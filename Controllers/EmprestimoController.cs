@@ -80,6 +80,21 @@ namespace EmprestimoLivros.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Excluir(EmprestimosModel emprestimo)
+        {
+            if(emprestimo == null)
+            {
+                return NotFound();
+            }
+
+            _db.Emprestimos.Remove(emprestimo);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+
+        }
+
         public IActionResult Editar(EmprestimosModel emprestimo)
         {
             if (ModelState.IsValid)
@@ -92,5 +107,7 @@ namespace EmprestimoLivros.Controllers
 
             return View(emprestimo);
         }
+
+
     }
 }
